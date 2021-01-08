@@ -2,6 +2,7 @@ SET QUOTED_IDENTIFIER ON
 GO
 SET ANSI_NULLS ON
 GO
+
 CREATE PROC [RptContactsWithinPeriodUsingFunction].[SetUp]
 AS
 BEGIN
@@ -47,7 +48,9 @@ BEGIN
 
 	--Set Up Expected Data Table
 	IF OBJECT_ID('RptContactsWithinPeriodUsingFunction.Expected') IS NOT NULL
+	BEGIN
 		DROP TABLE RptContactsWithinPeriodUsingFunction.Expected;
+	END;
 
 	CREATE TABLE RptContactsWithinPeriodUsingFunction.Expected
 	(
@@ -58,7 +61,9 @@ BEGIN
 
 	--Set Up Actual Data Table
 	IF OBJECT_ID('RptContactsWithinPeriodUsingFunction.Actual') IS NOT NULL
+	BEGIN
 		DROP TABLE RptContactsWithinPeriodUsingFunction.Actual;
+	END;
 
 	CREATE TABLE RptContactsWithinPeriodUsingFunction.Actual
 	(
