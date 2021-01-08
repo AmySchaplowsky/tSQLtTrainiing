@@ -7,17 +7,28 @@ CREATE PROC [RptContactTypes].[test to check routine outputs correct data in tab
 AS
 BEGIN
 	--Assemble
-	IF OBJECT_ID('RptContactTypes.Expected') IS NOT NULL
-	BEGIN
-		DROP TABLE RptContactTypes.Expected;
-	END;
-
-	CREATE TABLE RptContactTypes.Expected
+	INSERT dbo.Interaction
 	(
-		InteractionTypeText VARCHAR(100) NULL
-		,Occurrences		INT			 NULL
-		,TotalTimeMins		INT			 NULL
-	);
+		InteractionTypeID
+		,InteractionStartDT
+		,InteractionEndDT
+	)
+	VALUES
+	(
+		5											   -- InteractionTypeID - int
+		,CONVERT(DATETIME, '2013-01-03 09:00:00', 120) -- InteractionStartDT - datetime
+		,CONVERT(DATETIME, '2013-01-03 09:30:00', 120) -- InteractionEndDT - datetime
+	)
+		,(
+			 5												-- InteractionTypeID - int
+			 ,CONVERT(DATETIME, '2013-01-02 09:00:00', 120) -- InteractionStartDT - datetime
+			 ,CONVERT(DATETIME, '2013-01-02 10:30:00', 120) -- InteractionEndDT - datetime
+		 )
+		,(
+			 2												-- InteractionTypeID - int
+			 ,CONVERT(DATETIME, '2013-01-03 09:01:00', 120) -- InteractionStartDT - datetime
+			 ,CONVERT(DATETIME, '2013-01-03 09:13:00', 120) -- InteractionEndDT - datetime
+		 );
 
 	INSERT RptContactTypes.Expected
 	(
@@ -27,29 +38,14 @@ BEGIN
 	)
 	VALUES
 	(
-		'Complaint' -- InteractionTypeText - varchar(100)
-		,206		-- Occurrences - int
-		,78411		-- TotalTimeMins - int
+		'Meeting' -- InteractionTypeText - varchar(100)
+		,2		  -- Occurrences - int
+		,120	  -- TotalTimeMins - int
 	)
 		,(
-			 'Introduction' -- InteractionTypeText - varchar(100)
-			 ,214			-- Occurrences - int
-			 ,77837			-- TotalTimeMins - int
-		 )
-		,(
-			 'Meeting' -- InteractionTypeText - varchar(100)
-			 ,190	   -- Occurrences - int
-			 ,69050	   -- TotalTimeMins - int
-		 )
-		,(
-			 'Sale' -- InteractionTypeText - varchar(100)
-			 ,202	-- Occurrences - int
-			 ,75175 -- TotalTimeMins - int
-		 )
-		,(
 			 'Phone Call (Outbound)' -- InteractionTypeText - varchar(100)
-			 ,188					 -- Occurrences - int
-			 ,64839					 -- TotalTimeMins - int
+			 ,1						 -- Occurrences - int
+			 ,12					 -- TotalTimeMins - int
 		 );
 
 	--Act
