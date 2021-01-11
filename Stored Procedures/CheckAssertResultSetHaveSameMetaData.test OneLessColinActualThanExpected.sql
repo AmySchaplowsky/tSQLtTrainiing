@@ -2,8 +2,6 @@ SET QUOTED_IDENTIFIER ON
 GO
 SET ANSI_NULLS ON
 GO
---EXEC tSQLt.NewTestClass
---	@ClassName = N'CheckAssertResultSetHaveSameMetaData'; -- nvarchar(max)
 
 CREATE PROCEDURE [CheckAssertResultSetHaveSameMetaData].[test OneLessColinActualThanExpected]
 AS

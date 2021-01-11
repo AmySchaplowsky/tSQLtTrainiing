@@ -2,7 +2,7 @@ SET QUOTED_IDENTIFIER ON
 GO
 SET ANSI_NULLS ON
 GO
-CREATE PROCEDURE [CheckAssertResultSetHaveSameMetaData].[test Cols in differnt order]
+CREATE PROCEDURE [CheckAssertResultSetHaveSameMetaData].[test Col3 has differt datatype]
 AS
 BEGIN
 	--Assemble
@@ -10,14 +10,14 @@ BEGIN
 	(
 		Col1  INT NULL
 		,Col2 INT NULL
-		,col3 INT NULL
+		,Col3 INT NULL
 	);
 
 	CREATE TABLE CheckAssertResultSetHaveSameMetaData.Actual
 	(
-		Col1  INT NULL
-		,Col3 INT NULL
-		,Col2 INT NULL
+		Col1  INT		  NULL
+		,Col2 INT		  NULL
+		,Col3 VARCHAR(10) NULL
 	);
 
 	--Act
