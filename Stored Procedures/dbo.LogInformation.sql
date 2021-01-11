@@ -1,0 +1,19 @@
+SET QUOTED_IDENTIFIER ON
+GO
+SET ANSI_NULLS ON
+GO
+
+CREATE PROC [dbo].[LogInformation] @Msg VARCHAR(100)
+AS
+BEGIN
+	IF OBJECT_ID('dbo.tbl_log') IS NULL
+	BEGIN
+		CREATE TABLE dbo.tbl_log
+		(
+			LogID		INT			IDENTITY(1, 1)
+			,LogMessage VARCHAR(100)
+			,Logged		DATETIME	NOT NULL DEFAULT GETDATE()
+		);
+	END;
+END;
+GO
