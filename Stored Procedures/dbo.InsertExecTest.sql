@@ -1,0 +1,20 @@
+SET QUOTED_IDENTIFIER ON
+GO
+SET ANSI_NULLS ON
+GO
+
+CREATE PROCEDURE [dbo].[InsertExecTest]
+AS
+BEGIN
+	SELECT
+		1
+		,2
+		,3;
+
+	SELECT
+		4
+		,5
+		,6
+		,7;
+END;
+GO
