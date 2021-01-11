@@ -40,7 +40,7 @@ BEGIN
 
 	--Isolate from Function:
 	DECLARE @SqlString NVARCHAR(MAX) =
-		N'CREATE FUNCTION dbo.fcn_GetFirstOfMonth_Fake
+		N'CREATE FUNCTION RptContactsWithinPeriodUsingFunction.fcn_GetFirstOfMonth_Fake
 		  (
 		  	  @Date DATE
 		  )
@@ -54,7 +54,7 @@ BEGIN
 
 	EXEC tSQLt.FakeFunction
 		@FunctionName = N'dbo.fcn_GetFirstOfMonth' -- nvarchar(max)
-		,@FakeFunctionName = N'dbo.fcn_GetFirstOfMonth_Fake';
+		,@FakeFunctionName = N'RptContactsWithinPeriodUsingFunction.fcn_GetFirstOfMonth_Fake';
 
 	-- nvarchar(max)
 

@@ -7,6 +7,6 @@ CREATE PROC [dbo].[Maintenance_CustomersTakingMoreTime]
 AS
 BEGIN
 	--Stub Proc
-	WAITFOR DELAY '00:00:02';
+	WAITFOR DELAY '00:00:01';
 END;
 GO

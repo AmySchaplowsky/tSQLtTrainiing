@@ -6,7 +6,10 @@ GO
 CREATE PROCEDURE [dbo].[Maintenance] @Message VARCHAR(MAX) OUTPUT
 AS
 BEGIN
-	--Run Maintenance procedures
+	--Run Maintenance procedures, Report time taken
+	DECLARE @StartTime DATETIME;
+
+	SET @StartTime = GETDATE();
 	SET @Message = 'Failed to complete.';
 
 	EXEC dbo.Maintenance_CalculateAverages;
@@ -14,6 +17,6 @@ BEGIN
 	EXEC dbo.Maintenance_CustomersTakingMoreTime;
 
 	SELECT
-		@Message = 'Completed.';
+		@Message = 'Completed in ' + CONVERT(VARCHAR(10), DATEDIFF(ms, @StartTime, GETDATE())) + ' milliseconds';
 END;
 GO
