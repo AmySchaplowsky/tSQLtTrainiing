@@ -2,7 +2,8 @@ SET QUOTED_IDENTIFIER ON
 GO
 SET ANSI_NULLS ON
 GO
-CREATE FUNCTION [RptContactsWithinPeriodUsingFunction].[fcn_GetFirstOfMonth]
+
+CREATE FUNCTION [Mock].[fcn_GetFirstOfMonth]
 (
 	@Date DATE
 )

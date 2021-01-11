@@ -41,7 +41,7 @@ BEGIN
 	--Isolate from Function:
 	EXEC tSQLt.FakeFunction
 		@FunctionName = N'dbo.fcn_GetFirstOfMonth' -- nvarchar(max)
-		,@FakeFunctionName = N'RptContactsWithinPeriodUsingFunction.fcn_GetFirstOfMonth';
+		,@FakeFunctionName = N'Mock.fcn_GetFirstOfMonth';
 
 	-- nvarchar(max)
 
