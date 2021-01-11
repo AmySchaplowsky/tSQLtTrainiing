@@ -39,12 +39,24 @@ BEGIN
 		 );
 
 	--Isolate from Function:
-	EXEC tSQLt.RemoveObject @ObjectName = N'dbo.fcn_GetFirstOfMonth'; -- nvarchar(max)
-
 	DECLARE @SqlString NVARCHAR(MAX) =
-		N'CREATE FUNCTION dbo.fcn_GetFirstOfMonth (@Date DATE) RETURNS datetime AS BEGIN RETURN ''2013-02-01 00:00:00''; END;';
+		N'CREATE FUNCTION RptContactsWithinPeriodUsingFunction.fcn_GetFirstOfMonth
+		  (
+		  	  @Date DATE
+		  )
+		  RETURNS DATETIME
+		  AS
+		  BEGIN
+		  	  RETURN ''2013-02-01 00:00:00'';
+		  END;';
 
 	EXEC sys.sp_executesql @statement = @SqlString;
+
+	EXEC tSQLt.FakeFunction
+		@FunctionName = N'dbo.fcn_GetFirstOfMonth' -- nvarchar(max)
+		,@FakeFunctionName = N'RptContactsWithinPeriodUsingFunction.fcn_GetFirstOfMonth';
+
+	-- nvarchar(max)
 
 	--Set Up Expected Data Table
 	IF OBJECT_ID('RptContactsWithinPeriodUsingFunction.Expected') IS NOT NULL
