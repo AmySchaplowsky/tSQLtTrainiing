@@ -2,6 +2,7 @@ SET QUOTED_IDENTIFIER ON
 GO
 SET ANSI_NULLS ON
 GO
+
 CREATE PROC [RptContactsWithinPeriod].[test Util_GetFirstOfMonth is called correctly]
 AS
 BEGIN
@@ -26,7 +27,20 @@ BEGIN
 		'2013-01-05'
 	);
 
+	CREATE TABLE RptContactsWithinPeriod.Actual
+	(
+		InteractionTypeText VARCHAR(100) NULL
+		,Occurrences		INT			 NULL
+		,TotalTimeMins		INT			 NULL
+	);
+
 	--Act
+	INSERT INTO RptContactsWithinPeriod.Actual
+	(
+		InteractionTypeText
+		,Occurrences
+		,TotalTimeMins
+	)
 	EXEC dbo.RptContactsWithinPeriod
 		@WithinLastMonths = 1
 		,@RunAsAt = '2013-01-05';
