@@ -18,7 +18,6 @@ BEGIN
 		Col1  INT NULL
 		,Col2 INT NULL
 		,Col3 INT NULL
-		,Col4 INT NULL
 	);
 
 	INSERT AssertEqualsTableSchema.Expected
@@ -99,4 +98,5 @@ BEGIN
 		,@Actual = N'AssertEqualsTableSchema.Actual'	-- nvarchar(max)
 		,@Message = N'The schemas are different.';		-- nvarchar(max)
 END;
+
 GO
