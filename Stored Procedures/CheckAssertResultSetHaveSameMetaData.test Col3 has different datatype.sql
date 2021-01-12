@@ -3,7 +3,7 @@ GO
 SET ANSI_NULLS ON
 GO
 
-CREATE PROCEDURE [CheckAssertResultSetHaveSameMetaData].[test Col3 has differt datatype]
+CREATE PROCEDURE [CheckAssertResultSetHaveSameMetaData].[test Col3 has different datatype]
 AS
 BEGIN
 	DECLARE @IsTestDisabled BIT = 1;
@@ -46,4 +46,5 @@ BEGIN
 			,@actualCommand = N'SELECT * FROM CheckAssertResultSetHaveSameMetaData.Actual';	  -- nvarchar(max)
 	END;
 END;
+
 GO
