@@ -6,6 +6,22 @@ GO
 CREATE PROCEDURE [DevelopmentStandards].[test Naming Convention - test classes correspond to object in database]
 AS
 BEGIN
+	DECLARE @IsTestDisabled BIT = 1; -- set this to 1 if you don't want the test to run
+
+	IF @IsTestDisabled = 1
+	BEGIN
+		DECLARE @SchemaName VARCHAR(1000);
+
+		SELECT
+			@SchemaName = QUOTENAME(SCHEMA_NAME(schema_id)) + '.'
+		FROM sys.procedures
+		WHERE object_id = @@procid;
+
+		PRINT 'Disabled Test: ' + @SchemaName + QUOTENAME(OBJECT_NAME(@@procid));
+
+		RETURN;
+	END;
+
 	--Assemble
 	--Act
 	SELECT

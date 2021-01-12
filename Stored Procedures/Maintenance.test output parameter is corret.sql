@@ -16,7 +16,7 @@ BEGIN
 	--Act
 	DECLARE @Actual VARCHAR(MAX);
 
-	EXEC dbo.Maintenance @Message = @Actual OUTPUT;
+	EXEC dbo.MaintenanceStatic @Message = @Actual OUTPUT;
 
 	--Assert
 	EXEC tSQLt.AssertEqualsString
@@ -24,4 +24,5 @@ BEGIN
 		,@Actual = @Actual													-- nvarchar(max)
 		,@Message = N'Expected message was not recived in output variable'; -- nvarchar(max)
 END;
+
 GO

@@ -6,97 +6,113 @@ GO
 CREATE PROCEDURE [CheckAssertEqualsTable].[test OneLessDataInActualColThanExpected]
 AS
 BEGIN
-	--Checking behaviour for unpopulated columns
+	DECLARE @IsTestDisabled BIT = 1;
 
-	--Assemble
-	CREATE TABLE [CheckAssertEqualsTable].Expected
-	(
-		Col1  INT NULL
-		,Col2 INT NULL
-		,col3 INT NULL
-	);
+	IF (@IsTestDisabled = 1)
+	BEGIN
+		DECLARE @SchemaName VARCHAR(1000);
 
-	CREATE TABLE [CheckAssertEqualsTable].Actual
-	(
-		Col1  INT NULL
-		,Col2 INT NULL
-		,Col3 INT NULL
-	);
+		SELECT
+			@SchemaName = QUOTENAME(SCHEMA_NAME(schema_id)) + '.'
+		FROM sys.procedures
+		WHERE object_id = @@procid;
 
-	INSERT [CheckAssertEqualsTable].Expected
-	(
-		Col1
-		,Col2
-		,col3
-	)
-	VALUES
-	(
-		1
-		,2
-		,3
-	);
+		PRINT 'Disabled Test: ' + @SchemaName + QUOTENAME(OBJECT_NAME(@@procid));
 
-	INSERT [CheckAssertEqualsTable].Actual
-	(
-		Col1
-		,Col2
-	)
-	VALUES
-	(
-		1
-		,2
-	);
+		RETURN 0;
+	END;
 
-	INSERT [CheckAssertEqualsTable].Expected
-	(
-		Col1
-		,Col2
-	)
-	VALUES
-	(
-		4
-		,5
-	);
+	BEGIN
+		--Assemble
+		CREATE TABLE [CheckAssertEqualsTable].Expected
+		(
+			Col1  INT NULL
+			,Col2 INT NULL
+			,col3 INT NULL
+		);
 
-	INSERT [CheckAssertEqualsTable].Actual
-	(
-		Col1
-		,Col2
-		,Col3
-	)
-	VALUES
-	(
-		4
-		,5
-		,6
-	);
+		CREATE TABLE [CheckAssertEqualsTable].Actual
+		(
+			Col1  INT NULL
+			,Col2 INT NULL
+			,Col3 INT NULL
+		);
 
-	INSERT [CheckAssertEqualsTable].Expected
-	(
-		Col1
-		,Col2
-	)
-	VALUES
-	(
-		7
-		,8
-	);
+		INSERT [CheckAssertEqualsTable].Expected
+		(
+			Col1
+			,Col2
+			,col3
+		)
+		VALUES
+		(
+			1
+			,2
+			,3
+		);
 
-	INSERT [CheckAssertEqualsTable].Actual
-	(
-		Col1
-		,Col2
-	)
-	VALUES
-	(
-		7
-		,8
-	);
+		INSERT [CheckAssertEqualsTable].Actual
+		(
+			Col1
+			,Col2
+		)
+		VALUES
+		(
+			1
+			,2
+		);
 
-	--Assert
-	EXEC tSQLt.AssertEqualsTable
-		@Expected = N'[CheckAssertEqualsTable].Expected' -- nvarchar(max)
-		,@Actual = N'[CheckAssertEqualsTable].Actual'	 -- nvarchar(max)
-		,@FailMsg = N'Data had one null col';			 -- nvarchar(max)
+		INSERT [CheckAssertEqualsTable].Expected
+		(
+			Col1
+			,Col2
+		)
+		VALUES
+		(
+			4
+			,5
+		);
+
+		INSERT [CheckAssertEqualsTable].Actual
+		(
+			Col1
+			,Col2
+			,Col3
+		)
+		VALUES
+		(
+			4
+			,5
+			,6
+		);
+
+		INSERT [CheckAssertEqualsTable].Expected
+		(
+			Col1
+			,Col2
+		)
+		VALUES
+		(
+			7
+			,8
+		);
+
+		INSERT [CheckAssertEqualsTable].Actual
+		(
+			Col1
+			,Col2
+		)
+		VALUES
+		(
+			7
+			,8
+		);
+
+		--Assert
+		EXEC tSQLt.AssertEqualsTable
+			@Expected = N'[CheckAssertEqualsTable].Expected' -- nvarchar(max)
+			,@Actual = N'[CheckAssertEqualsTable].Actual'	 -- nvarchar(max)
+			,@FailMsg = N'Data had one null col';			 -- nvarchar(max)
+	END;
 END;
 GO
