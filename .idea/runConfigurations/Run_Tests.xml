@@ -1,0 +1,7 @@
+<component name="ProjectRunConfigurationManager">
+  <configuration default="false" name="Run Tests" type="TSqltConfigurationType" factoryName="tSQLt">
+    <option name="dataSourceId" value="063cd03d-1ef0-44f9-9228-59a37ab18343" />
+    <option name="db" value="TestAMS" />
+    <method v="2" />
+  </configuration>
+</component>
