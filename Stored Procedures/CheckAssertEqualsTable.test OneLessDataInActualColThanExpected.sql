@@ -6,7 +6,7 @@ GO
 CREATE PROCEDURE [CheckAssertEqualsTable].[test OneLessDataInActualColThanExpected]
 AS
 BEGIN
-	DECLARE @IsTestDisabled BIT = 1;
+	DECLARE @IsTestDisabled BIT = 0;
 
 	IF (@IsTestDisabled = 1)
 	BEGIN
@@ -24,21 +24,21 @@ BEGIN
 
 	BEGIN
 		--Assemble
-		CREATE TABLE [CheckAssertEqualsTable].Expected
-		(
-			Col1  INT NULL
-			,Col2 INT NULL
-			,col3 INT NULL
-		);
-
-		CREATE TABLE [CheckAssertEqualsTable].Actual
+		CREATE TABLE CheckAssertEqualsTable.Expected
 		(
 			Col1  INT NULL
 			,Col2 INT NULL
 			,Col3 INT NULL
 		);
 
-		INSERT [CheckAssertEqualsTable].Expected
+		CREATE TABLE CheckAssertEqualsTable.Actual
+		(
+			Col1  INT NULL
+			,Col2 INT NULL
+			,Col3 INT NULL
+		);
+
+		INSERT CheckAssertEqualsTable.Expected
 		(
 			Col1
 			,Col2
@@ -51,7 +51,7 @@ BEGIN
 			,3
 		);
 
-		INSERT [CheckAssertEqualsTable].Actual
+		INSERT CheckAssertEqualsTable.Actual
 		(
 			Col1
 			,Col2
@@ -62,7 +62,7 @@ BEGIN
 			,2
 		);
 
-		INSERT [CheckAssertEqualsTable].Expected
+		INSERT CheckAssertEqualsTable.Expected
 		(
 			Col1
 			,Col2
@@ -73,7 +73,7 @@ BEGIN
 			,5
 		);
 
-		INSERT [CheckAssertEqualsTable].Actual
+		INSERT CheckAssertEqualsTable.Actual
 		(
 			Col1
 			,Col2
@@ -86,7 +86,7 @@ BEGIN
 			,6
 		);
 
-		INSERT [CheckAssertEqualsTable].Expected
+		INSERT CheckAssertEqualsTable.Expected
 		(
 			Col1
 			,Col2
@@ -97,7 +97,7 @@ BEGIN
 			,8
 		);
 
-		INSERT [CheckAssertEqualsTable].Actual
+		INSERT CheckAssertEqualsTable.Actual
 		(
 			Col1
 			,Col2
@@ -110,9 +110,9 @@ BEGIN
 
 		--Assert
 		EXEC tSQLt.AssertEqualsTable
-			@Expected = N'[CheckAssertEqualsTable].Expected' -- nvarchar(max)
-			,@Actual = N'[CheckAssertEqualsTable].Actual'	 -- nvarchar(max)
-			,@FailMsg = N'Data had one null col';			 -- nvarchar(max)
+			@Expected = N'CheckAssertEqualsTable.Expected' -- nvarchar(max)
+			,@Actual = N'CheckAssertEqualsTable.Actual'   -- nvarchar(max)
+			,@FailMsg = N'Data had one null col';		   -- nvarchar(max)
 	END;
 END;
 GO
