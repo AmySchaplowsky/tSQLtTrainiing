@@ -12,7 +12,7 @@ BEGIN
 
 	--Assert
 	EXEC tSQLt.AssertObjectDoesNotExist
-		@ObjectName = N'dbo.Customer.NotAColumn' -- nvarchar(max)
+		@ObjectName = N'dbo.Customer.CustomerID' -- nvarchar(max)
 		,@Message = N'';						 -- nvarchar(max)
 END;
 GO
